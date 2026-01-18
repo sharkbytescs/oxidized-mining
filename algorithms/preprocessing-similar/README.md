@@ -43,7 +43,7 @@ This exploration is grounded in several academic frameworks, detailed in the acc
 * `rust/`: A standalone Cargo project with manual implementations of similarity metrics.
 * `research-summary.md`: A derivative summary of the academic paper associated with this work.
 
-## 🚀 Usage
+## Usage
 **Python:** Run `jupyter notebook` within the `/python` directory.  
 **Rust:** Run `cargo run` within the `/rust` directory to see the similarity matrix output.
 
