@@ -1,0 +1,22 @@
+[package]
+name = "oxidized_mining_preprocessing"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+# Ergonomic error handling for binaries and experiments
+# Chosen over typed errors to keep early iteration simple
+anyhow = "1"
+
+# DataFrame library (Rust equivalent of pandas)
+# Used for CSV ingestion, missingness analysis, and feature typing
+polars = { version = "0.40", features = ["lazy", "csv", "dtype-categorical"] }
+
+# Static plotting (PNG/SVG) for missingness heatmaps
+# Replaces matplotlib/seaborn in the Python pipeline
+plotters = "0.3"
+
+# Tensor library for Rust-native ML
+# Chosen to avoid Python bindings and keep the pipeline fully in Rust
+candle-core = "0.6"
