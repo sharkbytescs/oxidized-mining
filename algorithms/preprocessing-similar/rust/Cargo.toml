@@ -4,19 +4,49 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+csv="1.4"
+serde = { version = "1.0.228", features = ["derive"] }
+# ==============================================================================
+# DATA MANIPULATION & CLEANING (The "Pandas" Replacement)
+# ==============================================================================
+# Polars is a DataFrame library.
+#
+# Features used:
+# - "lazy": Allows query optimization before execution (like Spark).
+# - "csv": Essential for loading your titanic.csv file.
+# - "describe": Provides quick summary statistics (null counts, mean, etc.).
+# - "dtype-categorical": Required for handling the 'Sex' and 'Embarked' columns.
+#polars = { version = "0.52", features = ["lazy", "csv", "dtype-categorical", "describe"] }
 
-# Ergonomic error handling for binaries and experiments
-# Chosen over typed errors to keep early iteration simple
-anyhow = "1"
+# ==============================================================================
+# NUMERICAL BACKEND (The "NumPy" Replacement)
+# ==============================================================================
+# In the Python, Scikit-Learn tools often return NumPy arrays.
+# In Rust, the Linfa ML library uses ndarray as its primary data structure.
+# This crate handles the heavy-duty matrix math required for PCA.
+ndarray = "0.16"
 
-# DataFrame library (Rust equivalent of pandas)
-# Used for CSV ingestion, missingness analysis, and feature typing
-polars = { version = "0.40", features = ["lazy", "csv", "dtype-categorical"] }
+# ==============================================================================
+# MACHINE LEARNING PIPELINE (The "Scikit-Learn" Replacement)
+# ==============================================================================
+# Linfa provides a "fit/transform" API similar to Scikit-Learn.
+# We break this into specific sub-crates to keep the binary small and efficient.
 
-# Static plotting (PNG/SVG) for missingness heatmaps
-# Replaces matplotlib/seaborn in the Python pipeline
-plotters = "0.3"
+# The core ML framework (Datasets, traits, and common errors)
+linfa = "0.7.0"
 
-# Tensor library for Rust-native ML
-# Chosen to avoid Python bindings and keep the pipeline fully in Rust
-candle-core = "0.6"
+# Specifically replaces StandardScaler from your Python script.
+# Essential for normalizing data before PCA to ensure variance is comparable.
+linfa-preprocessing = "0.7.0"
+
+# Specifically replaces the PCA module.
+# Used for dimensionality reduction and identifying principal components.
+linfa-reduction = "0.7.0"
+
+# ==============================================================================
+# VISUALIZATION (The "Matplotlib/Seaborn" Replacement)
+# ==============================================================================
+# Plotters is the standard for Rust-native data visualization.
+# We will use this to recreate the "Missingness Heatmap" you built in Step 2.
+# It supports rendering to SVG or PNG without needing a Python runtime.
+plotters = "0.3.7"

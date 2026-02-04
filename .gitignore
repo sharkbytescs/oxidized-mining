@@ -1,0 +1,10 @@
+# Rust build output (this will ignore rust/target no matter where it is)
+**/target/
+
+# Editor/IDE junk
+.vscode/
+.idea/
+
+# OS junk
+.DS_Store
+Thumbs.db
